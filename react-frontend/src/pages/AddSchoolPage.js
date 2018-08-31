@@ -35,6 +35,7 @@ class AddSchoolPage extends Component {
     event.preventDefault();
 
     this.addSchoolService.sendData(this.state.name);
+    window.location.reload();
     this.props.history.push('/index');
   }
   render() { 

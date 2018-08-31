@@ -45,7 +45,7 @@ const sidebarBackground = {
   backgroundRepeat: 'no-repeat',
 };
 
-const navSchools = [
+/* const navSchools = [
   { to: '/buttons', name: 'buttons', exact: false, Icon: MdBorderAll },
   {
     to: '/button-groups',
@@ -65,7 +65,9 @@ const navSchools = [
   { to: '/alerts', name: 'alerts', exact: false, Icon: MdBorderAll },
   { to: '/progress', name: 'progress', exact: false, Icon: MdBorderAll },
   { to: '/modals', name: 'modals', exact: false, Icon: MdBorderAll },
-];
+]; */
+
+var navSchools = [];
 
 const navComponents = [
   { to: '/buttons', name: 'buttons', exact: false, Icon: MdRadioButtonChecked },
@@ -105,13 +107,13 @@ const pageContents = [
 ];
 
 const navItems = [
-  { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
+  // { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
   { to: '/add-data', name: 'Add data', exact: true, Icon: MdDashboard },
   { to: '/add-school', name: 'Add school', exact: false, Icon: MdWeb },
   { to: '/profile', name: 'Edit profile', exact: false, Icon: MdWeb },
   { to: '/users', name: 'users', exact: false, Icon: MdWidgets },
-  { to: '/charts', name: 'charts', exact: false, Icon: MdInsertChart },
-  { to: '/widgets', name: 'widgets', exact: false, Icon: MdWidgets },
+  // { to: '/charts', name: 'charts', exact: false, Icon: MdInsertChart },
+  // { to: '/widgets', name: 'widgets', exact: false, Icon: MdWidgets },
 ];
 
 const bem = bn.create('sidebar');
@@ -120,7 +122,7 @@ class Sidebar extends React.Component {
   state = {
     isOpenComponents: true,
     isOpenContents: true,
-    isOpenPages: true,
+    isOpenPages: true
   };
 
   constructor(props) {
@@ -141,10 +143,19 @@ class Sidebar extends React.Component {
   }
 
   setNavSchools(schools){
+    navSchools = [];
     if (schools) {
-      console.log(schools);
+      schools.map(function(school, i){
+        var navSchool = {
+          to: '/buttons/' + school._id , name: school.name, exact: false, Icon: MdBorderAll, id: school._id
+        };
+        navSchools.push(navSchool);
+        return navSchools;
+      });
+
+      }
     }
-  }
+
   handleClick = name => () => {
     this.setState(prevState => {
       const isOpen = prevState[`isOpen${name}`];
@@ -156,6 +167,8 @@ class Sidebar extends React.Component {
   };
 
   render() {
+    console.log("now see");
+    console.log(this.props);
     return (
       <aside className={bem.b()} data-image={sidebarBgImage}>
         <div className={bem.e('background')} style={sidebarBackground} />
@@ -228,7 +241,7 @@ class Sidebar extends React.Component {
               ))}
             </Collapse>
 
-            <NavItem
+{/*             <NavItem
               className={bem.e('nav-item')}
               onClick={this.handleClick('Components')}>
               <BSNavLink className={bem.e('nav-item-collapse')}>
@@ -302,7 +315,7 @@ class Sidebar extends React.Component {
                   </BSNavLink>
                 </NavItem>
               ))}
-            </Collapse>
+            </Collapse> */}
 
             <NavItem
               className={bem.e('nav-item')}

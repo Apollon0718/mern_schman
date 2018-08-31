@@ -27,6 +27,7 @@ import AddSchoolPage from './pages/AddSchoolPage';
 import AddDataPage from './pages/AddDataPage';
 import ProfilePage from './pages/ProfilePage';
 import UsersPage from './pages/UsersPage';
+import HomePage from './pages/HomePage';
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
@@ -64,7 +65,7 @@ class App extends React.Component {
               exact
               path="/"
               layout={MainLayout}
-              component={DashboardPage}
+              component={HomePage}
             />
             <LayoutRoute
               exact
