@@ -23,11 +23,19 @@ import React from 'react';
 import componentQueries from 'react-component-queries';
 import { BrowserRouter, Redirect, Switch } from 'react-router-dom';
 import './styles/reduction.css';
+
+// customized import details
 import AddSchoolPage from './pages/AddSchoolPage';
 import AddDataPage from './pages/AddDataPage';
 import ProfilePage from './pages/ProfilePage';
 import UsersPage from './pages/UsersPage';
 import HomePage from './pages/HomePage';
+import StatisticsPage from './pages/StatisticsPage';
+// import {
+//   BrowserRouter as Router,
+//   Route,
+//   Link
+// } from 'react-router-dom';
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
@@ -102,6 +110,12 @@ class App extends React.Component {
               path="/tables"
               layout={MainLayout}
               component={TablePage}
+            />
+            <LayoutRoute
+              exact
+              path="/statistics/:id"
+              layout={MainLayout}
+              component={StatisticsPage}
             />
             <LayoutRoute
               exact

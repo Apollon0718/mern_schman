@@ -123,7 +123,7 @@ const statisticsSave = function (req, res) {
                     } else {
                         res
                             .status(201)
-                            .json(school);
+                            .json({"message":"success", "data":school});
                     }
                 });
             }

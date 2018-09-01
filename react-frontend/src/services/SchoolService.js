@@ -7,7 +7,7 @@ class SchoolService {
       name: data
     })
     .then(res => function() {
-      console.log(res);
+      console.log(res);;
       this.setState({ names: res.data });
       })
     .catch(function (error) {
@@ -29,18 +29,14 @@ class SchoolService {
     }
 
     sendSchoolData(data) {
-      axios.post('http://localhost:4200/api/schools/statistics', 
-       data
-    )
-    .then(res => function() {
-      console.log(res);
-      this.setState({ schoolData: res.data });
-      })
-    .catch(function (error) {
-      console.log(error);
-    });
+      axios.post('http://localhost:4200/api/schools/statistics', data)
+      .then(res =>       
+      this.setState({ schoolData: res.data , message: res.message})
+      )
+      .catch(function (error) {
+        console.log(error);
+      });
     }
-
   
   }
 
