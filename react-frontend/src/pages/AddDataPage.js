@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { toast } from 'react-toastify';
+import {ToastContainer, ToastStore} from 'react-toasts';
 
 import {
   Row,
@@ -113,7 +114,7 @@ class AddDataPage extends Component {
     .then(res => {      
       this.setState({ schoolData: res.data , message: res.message});
       // alert("success");
-      this.notify();
+      ToastStore.success("Data added successfully.", 3000);
     })
     .catch(function (error) {
       console.log(error);
@@ -125,8 +126,7 @@ class AddDataPage extends Component {
 
     this.sendSchoolData(this.state.schoolData);
     console.log(this.state.message);
-    // alert("Data is finally added successfully");
-    this.setState({message: ''});
+
   }
 
   render() { 
@@ -262,6 +262,7 @@ class AddDataPage extends Component {
               </CardBody>
             </Card>
           </Col>
+          <ToastContainer  position={ToastContainer.POSITION.TOP_CENTER} store={ToastStore}/>
         </Row>
       </Page>
     )
