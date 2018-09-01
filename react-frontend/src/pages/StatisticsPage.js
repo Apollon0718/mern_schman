@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 import SchoolService from '../services/SchoolService';
 import axios from 'axios';
-import TableRow from './TableRow';
 import {Link} from 'react-router-dom';
 class StatisticsPage extends Component {
 
@@ -18,14 +17,36 @@ class StatisticsPage extends Component {
     }
     this.getSchoolService = new SchoolService();
     this.tableRow = this.tableRow.bind(this);
+    this.getData = this.getData.bind(this);
   }
 
   componentWillReceiveProps () {
     const id = this.props.match.params.id;
     
+    this.getData(id);
+/*     axios.get('http://localhost:4200/api/school/'+id)
+    .then(res => {
+      this.setState({ school: res.data });
+      this.forceUpdate();
+      // this.render();
+    })
+    .catch(function (error) {
+      console.log(error);
+    }); */
+  }
+
+  componentDidMount(){
+    const id = this.props.match.params.id;
+
+    this.getData(id);
+  }
+
+  getData(id){
     axios.get('http://localhost:4200/api/school/'+id)
     .then(res => {
       this.setState({ school: res.data });
+      // this.forceUpdate();
+      // this.render();
     })
     .catch(function (error) {
       console.log(error);
@@ -101,7 +122,7 @@ class StatisticsPage extends Component {
             </Col>
           </Row>
       </Page>
-    );
+    )
   }
   // render() { 
   //   return (  );

@@ -31,6 +31,7 @@ import ProfilePage from './pages/ProfilePage';
 import UsersPage from './pages/UsersPage';
 import HomePage from './pages/HomePage';
 import StatisticsPage from './pages/StatisticsPage';
+import EditDataPage from './pages/EditDataPage';
 // import {
 //   BrowserRouter as Router,
 //   Route,
@@ -113,10 +114,16 @@ class App extends React.Component {
             />
             <LayoutRoute
               exact
+              path="/edit/:id"
+              layout={MainLayout}
+              component={EditDataPage}
+            />
+            <LayoutRoute
+              exact
               path="/statistics/:id"
               layout={MainLayout}
               component={StatisticsPage}
-            />
+            />  
             <LayoutRoute
               exact
               path="/badges"
