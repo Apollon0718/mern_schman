@@ -129,39 +129,6 @@ const statisticsSave = function (req, res) {
             }
         });
     
-/*     if (!school) {
-        res
-            .status(404)
-            .json({
-                "message": "schoolid not found"
-            });
-    } else {
-        school.statistics.push({
-            year: req.body.year,
-            week: req.body.week,
-            month: req.body.month,
-            elect_eur: req.body.elect_eur,
-            elect_kwh: req.body.elect_kwh,
-            heating_eur: req.body.heating_eur,
-            heating_kwh: req.body.heating_kwh,
-            water_eur: req.body.water_eur,
-            water_litres: req.body.water_litres
-        });
-        school.save((err, school) => {
-            if (err) {
-                console.log(err);
-                res
-                    .status(400)
-                    .json(err);
-            } else {
-                res
-                    .status(201)
-                    .json(school)
-            }
-        });
-    } */
-
-
 };
 
 const statisticsEdit = function (req, res) {

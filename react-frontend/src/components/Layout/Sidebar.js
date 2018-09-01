@@ -5,24 +5,24 @@ import React from 'react';
 import FaGithub from 'react-icons/lib/fa/github';
 import {
   MdAccountCircle,
-  MdArrowDropDownCircle,
+  // MdArrowDropDownCircle,
   MdBorderAll,
-  MdBrush,
-  MdChromeReaderMode,
+  // MdBrush,
+  // MdChromeReaderMode,
   MdDashboard,
   MdExtension,
-  MdGroupWork,
-  MdInsertChart,
+  // MdGroupWork,
+  // MdInsertChart,
   MdKeyboardArrowDown,
-  MdNotificationsActive,
+  // MdNotificationsActive,
   MdPages,
-  MdRadioButtonChecked,
-  MdSend,
-  MdStar,
-  MdTextFields,
+  // MdRadioButtonChecked,
+  // MdSend,
+  // MdStar,
+  // MdTextFields,
   MdViewCarousel,
-  MdViewDay,
-  MdViewList,
+  // MdViewDay,
+  // MdViewList,
   MdWeb,
   MdWidgets,
 } from 'react-icons/lib/md';
@@ -69,7 +69,7 @@ const sidebarBackground = {
 
 var navSchools = [];
 
-const navComponents = [
+/* const navComponents = [
   { to: '/buttons', name: 'buttons', exact: false, Icon: MdRadioButtonChecked },
   {
     to: '/button-groups',
@@ -89,12 +89,12 @@ const navComponents = [
   { to: '/alerts', name: 'alerts', exact: false, Icon: MdNotificationsActive },
   { to: '/progress', name: 'progress', exact: false, Icon: MdBrush },
   { to: '/modals', name: 'modals', exact: false, Icon: MdViewDay },
-];
+]; */
 
-const navContents = [
+/* const navContents = [
   { to: '/typography', name: 'typography', exact: false, Icon: MdTextFields },
   { to: '/tables', name: 'tables', exact: false, Icon: MdBorderAll },
-];
+]; */
 
 const pageContents = [
   { to: '/login', name: 'login / signup', exact: false, Icon: MdAccountCircle },
@@ -167,8 +167,6 @@ class Sidebar extends React.Component {
   };
 
   render() {
-    console.log("now see");
-    console.log(this.props);
     return (
       <aside className={bem.b()} data-image={sidebarBgImage}>
         <div className={bem.e('background')} style={sidebarBackground} />

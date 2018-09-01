@@ -34,7 +34,7 @@ class AddSchoolPage extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    this.addSchoolService.sendData(this.state.name);
+    this.addSchoolService.sendSchoolName(this.state.name);
     window.location.reload();
     this.props.history.push('/index');
   }
@@ -71,35 +71,3 @@ class AddSchoolPage extends Component {
 }
  
 export default AddSchoolPage;
-
-/* const AddSchool = () => {
-
-  return (
-    <Page title="Add school" breadcrumbs={[{ name: 'Add school  ', active: true }]}>
-      <Row>
-        <Col xl={12} lg={12} md={12}>
-          <Card>
-            <CardHeader>Add School Form</CardHeader>
-            <CardBody>
-              <Form>
-                <FormGroup>
-                  <Label for="exampleSchool">School</Label>
-                  <Input
-                    type="text"
-                    name="school"
-                    placeholder="School name"
-                    value={this.Input.value}
-                  />
-                </FormGroup>
-                <FormGroup check row>
-                    <Button>Add</Button>
-                </FormGroup>
-              </Form>
-            </CardBody>
-          </Card>
-        </Col>        
-      </Row>
-    </Page>
-  );
-}; */
-

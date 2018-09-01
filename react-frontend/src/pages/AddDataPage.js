@@ -20,20 +20,32 @@ import axios from 'axios';
 import SchoolService from '../services/SchoolService';
 
 class AddDataPage extends Component {
-  state = { 
-    schools: []
-  }
 
   constructor(props) {
     super(props);
-    this.state = {schools: []};
+    this.state = {
+      schools: [],
+      schoolData: {
+                  _id: '',
+                  year: '',
+                  week: '',
+                  month: '',
+                  elect_eur: '',
+                  elect_kwh: '',
+                  heating_eur: '',
+                  heating_kwh: '',
+                  water_eur: '',
+                  water_litres: '' ,       
+                  }
+    };
     this.addSchoolService = new SchoolService();
+    this.onChange = this.onChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  componentWillMount(){
+  componentDidMount(){
     axios.get('http://localhost:4200/api/schools')
     .then(response => {
       this.setState({ schools: response.data });
-      console.log(this.state.schools);
     })
     .catch(function(error) {
       console.log(error);
@@ -43,7 +55,7 @@ class AddDataPage extends Component {
   schoolOption(){
     if (this.state.schools instanceof Array) {
       return this.state.schools.map(function(school, i){
-        return <option value={school.name} id={school._id} key={i}>{school.name}</option>;
+        return <option value={school._id} id={school._id} key={i}>{school.name}</option>;
       })
     }
   }
@@ -71,19 +83,29 @@ class AddDataPage extends Component {
       return <option value={week} key={i}>{week}</option>;
     })
   }
-    monthOptions(){
-      const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-      /* var i = 0;
-      for (let month = 1; month < 12; month++) {
-        months[i] = month;
-        i++;
-      }      */ 
-      return months.map(function(month, i) {
-        return <option value={month} key={i} id={i}>{month}</option>;
-      })
-    }
+  monthOptions(){
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    return months.map(function(month, i) {
+      return <option value={i} key={i}>{month}</option>;
+    })
+  }
+
+  onChange(event) {
+    const schoolData = Object.assign({}, this.state.schoolData);
+    schoolData[event.target.name] = event.target.value;
+    this.setState({schoolData});
+  }
+
+  handleSubmit(event){
+    event.preventDefault();
+    // this.addSchoolService.sendSchoolData(this.state.schoolData);
+    console.log(this.state.schoolData);
+    console.log("read this form data");
+    this.addSchoolService.sendSchoolData(this.state.schoolData);
+  }
 
   render() { 
+    const schoolData = this.state.schoolData;
     return (
       <Page title="Add Data" breadcrumbs={[{ name: 'Add data', active: true }]}>
         <Row>
@@ -91,12 +113,12 @@ class AddDataPage extends Component {
             <Card>
               <CardHeader>ADD DATA</CardHeader>
               <CardBody>
-                <Form>
+                <Form onSubmit={this.handleSubmit}>
                   <Row>
                     <Col md={12}>
                       <FormGroup>
                         <Label for="exampleSelect">School Name</Label>
-                        <Input type="select" name="name">
+                        <Input type="select" name="_id" value={schoolData._id} onChange={this.onChange}>
                           <option disabled selected>Select school</option>
                           {this.schoolOption()}
                         </Input>
@@ -105,7 +127,7 @@ class AddDataPage extends Component {
                     <Col xl={4} lg={4} md={12}>
                       <FormGroup>
                         <Label for="exampleSelect">Year</Label>
-                        <Input type="select" name="year">
+                        <Input type="select" name="year" value={schoolData.year} onChange={this.onChange}>
                           {this.yearOptions()}
                         </Input>
                       </FormGroup>
@@ -113,7 +135,7 @@ class AddDataPage extends Component {
                     <Col xl={4} lg={4} md={12}>
                       <FormGroup>
                         <Label for="exampleSelect">Week</Label>
-                        <Input type="select" name="week">
+                        <Input type="select" name="week" value={schoolData.week} onChange={this.onChange}>
                           {this.weekOptions()}
                         </Input>
                       </FormGroup>
@@ -121,18 +143,20 @@ class AddDataPage extends Component {
                     <Col xl={4} lg={4} md={12}>
                       <FormGroup>
                         <Label for="exampleSelect">Month</Label>
-                        <Input type="select" name="month">
+                        <Input type="select" name="month" value={schoolData.month} onChange={this.onChange}>
                           {this.monthOptions()}
                         </Input>
                       </FormGroup>
                     </Col>
                     <Col lg={6} md={12}>
                       <FormGroup>
-                        <Label for="elect_euro">Electricity euro</Label>
+                        <Label for="elect_eur">Electricity euro</Label>
                         <Input
                           type="text"
-                          name="elect_euro"
+                          name="elect_eur"
                           placeholder="Electricity euro"
+                          value={schoolData.elect_euro}
+                          onChange={this.onChange}
                         />
                       </FormGroup>                  
                     </Col>
@@ -143,16 +167,20 @@ class AddDataPage extends Component {
                           type="text"
                           name="elect_kwh"
                           placeholder="Electricity KWH"
+                          value={schoolData.elect_kwh}
+                          onChange={this.onChange}
                         />
                       </FormGroup>                  
                     </Col>
                     <Col lg={6} md={12}>
                       <FormGroup>
-                        <Label for="heat_euro">Heating euro</Label>
+                        <Label for="heat_eur">Heating euro</Label>
                         <Input
                           type="text"
-                          name="heat_euro"
+                          name="heating_eur"
                           placeholder="Heating euro"
+                          value={schoolData.heating_euro}
+                          onChange={this.onChange}
                         />
                       </FormGroup>                  
                     </Col>
@@ -161,18 +189,22 @@ class AddDataPage extends Component {
                         <Label for="heat_kwh">Heating KWH</Label>
                         <Input
                           type="text"
-                          name="heat_kwh"
+                          name="heating_kwh"
                           placeholder="Heating KWH"
+                          value={schoolData.heating_kwh}
+                          onChange={this.onChange}
                         />
                       </FormGroup>                  
                     </Col>
                     <Col lg={6} md={12}>
                       <FormGroup>
-                        <Label for="water_euro">Water euro</Label>
+                        <Label for="water_eur">Water euro</Label>
                         <Input
                           type="text"
-                          name="water_euro"
+                          name="water_eur"
                           placeholder="Water euro"
+                          value={schoolData.water_euro}
+                          onChange={this.onChange}
                         />
                       </FormGroup>                  
                     </Col>
@@ -183,11 +215,13 @@ class AddDataPage extends Component {
                           type="text"
                           name="water_litres"
                           placeholder="Water litres"
+                          value={schoolData.water_litres}
+                          onChange={this.onChange}
                         />
                       </FormGroup>                  
                     </Col>
                     <Col md={12}>
-                    <Button>Save Data</Button>
+                    <Button type="submit">Save Data</Button>
                     </Col>
                   </Row>
                 </Form>

@@ -2,8 +2,7 @@ import axios from 'axios';
 
 class SchoolService {
 
-    sendData(data) {
-      console.log(data);
+    sendSchoolName(data) {
       axios.post('http://localhost:4200/api/schools/add', {
       name: data
     })
@@ -28,6 +27,20 @@ class SchoolService {
       axios.get('http://localhost:4200/items/delete/'+id)
       .then(console.log('Deleted')).catch(err => console.log(err))
     }
+
+    sendSchoolData(data) {
+      axios.post('http://localhost:4200/api/schools/statistics', 
+       data
+    )
+    .then(res => function() {
+      console.log(res);
+      this.setState({ schoolData: res.data });
+      })
+    .catch(function (error) {
+      console.log(error);
+    });
+    }
+
   
   }
 
