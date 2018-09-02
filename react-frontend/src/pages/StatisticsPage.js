@@ -25,15 +25,6 @@ class StatisticsPage extends Component {
     const id = this.props.match.params.id;
     
     this.getData(id);
-/*     axios.get('http://localhost:4200/api/school/'+id)
-    .then(res => {
-      this.setState({ school: res.data });
-      this.forceUpdate();
-      // this.render();
-    })
-    .catch(function (error) {
-      console.log(error);
-    }); */
   }
 
   componentDidMount(){
@@ -46,7 +37,7 @@ class StatisticsPage extends Component {
     axios.get('http://localhost:4200/api/school/'+id)
     .then(res => {
       this.setState({ school: res.data });
-      // this.forceUpdate();
+      this.forceUpdate();
       // this.render();
     })
     .catch(function (error) {

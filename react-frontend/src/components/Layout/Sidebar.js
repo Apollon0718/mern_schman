@@ -5,24 +5,24 @@ import React from 'react';
 import FaGithub from 'react-icons/lib/fa/github';
 import {
   MdAccountCircle,
-  MdArrowDropDownCircle,
+  // MdArrowDropDownCircle,
   MdBorderAll,
-  MdBrush,
-  MdChromeReaderMode,
+  // MdBrush,
+  // MdChromeReaderMode,
   MdDashboard,
   MdExtension,
-  MdGroupWork,
-  MdInsertChart,
+  // MdGroupWork,
+  // MdInsertChart,
   MdKeyboardArrowDown,
-  MdNotificationsActive,
+  // MdNotificationsActive,
   MdPages,
-  MdRadioButtonChecked,
-  MdSend,
-  MdStar,
-  MdTextFields,
+  // MdRadioButtonChecked,
+  // MdSend,
+  // MdStar,
+  // MdTextFields,
   MdViewCarousel,
-  MdViewDay,
-  MdViewList,
+  // MdViewDay,
+  // MdViewList,
   MdWeb,
   MdWidgets,
 } from 'react-icons/lib/md';
@@ -74,7 +74,7 @@ const sidebarBackground = {
 
 var navSchools = [];
 
-const navComponents = [
+/* const navComponents = [
   { to: '/buttons', name: 'buttons', exact: false, Icon: MdRadioButtonChecked },
   {
     to: '/button-groups',
@@ -95,6 +95,7 @@ const navComponents = [
   { to: '/progress', name: 'progress', exact: false, Icon: MdBrush },
   { to: '/modals', name: 'modals', exact: false, Icon: MdViewDay },
 ];
+ */
 
 /* const navContents = [
   { to: '/typography', name: 'typography', exact: false, Icon: MdTextFields },
@@ -244,7 +245,7 @@ class Sidebar extends React.Component {
               ))}
             </Collapse>
 
-            <NavItem
+            {/* <NavItem
               className={bem.e('nav-item')}
               onClick={this.handleClick('Components')}>
               <BSNavLink className={bem.e('nav-item-collapse')}>
@@ -280,7 +281,7 @@ class Sidebar extends React.Component {
                   </BSNavLink>
                 </NavItem>
               ))}
-            </Collapse>
+            </Collapse> */}
 
             {/* <NavItem
               className={bem.e('nav-item')}

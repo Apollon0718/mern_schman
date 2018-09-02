@@ -27,6 +27,7 @@ class EditDataPage extends Component {
   constructor(props) {
     super(props);
     this.schoolid = this.props.match.params.schoolid;
+    this.statisticid = this.props.match.params.id;
      this.state = {
       schools: [],
       schoolData: {
@@ -46,7 +47,7 @@ class EditDataPage extends Component {
     this.addSchoolService = new SchoolService();
     this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.sendSchoolData = this.sendSchoolData.bind(this);
+    this.sendModifiedData = this.sendModifiedData.bind(this);
   }
   componentDidMount(){
     axios.get('http://localhost:4200/api/schools')
@@ -142,8 +143,8 @@ class EditDataPage extends Component {
   }
 
   // send the school data to server
-  sendSchoolData(data) {
-    axios.post('http://localhost:4200/api/schools/statistics', data)
+/*   sendSchoolData(data, schoolid, statisticid) {
+    axios.post('http://localhost:4200/api/school/' + schoolid + '/statistic/' + statisticid, data)
     .then(res => {      
       this.setState({ schoolData: res.data , message: res.message});
       // alert("success");
@@ -152,14 +153,23 @@ class EditDataPage extends Component {
     .catch(function (error) {
       console.log(error);
     });
+  } */
+
+  sendModifiedData(data, schoolid, statisticid) {
+    axios.post('http://localhost:4200/api/school/' + schoolid + '/statistics/' + statisticid, data)
+    .then(res => {      
+      this.setState({ schoolData: res.data , message: res.message});
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   handleSubmit(event){
     event.preventDefault();
-
-    this.sendSchoolData(this.state.schoolData);
-    console.log(this.state.message);
-
+    this.sendModifiedData(this.state.schoolData, this.schoolid, this.statisticid);
+    this.props.history.push('/statistics/' + this.schoolid);
+    window.location.reload();
   }
 
   render() { 
@@ -287,7 +297,7 @@ class EditDataPage extends Component {
                       </ValidatingFormGroup>                  
                     </Col>
                     <Col md={12}>
-                    <Button type="submit">Save Data</Button>
+                    <Button type="submit">Update Data</Button>
                     </Col>
                   </Row>
                 </Form>
@@ -297,8 +307,7 @@ class EditDataPage extends Component {
           <ToastContainer  position={ToastContainer.POSITION.TOP_CENTER} store={ToastStore}/>
         </Row>
       </Page>
-    )
-  
+    ) 
     
   }
 }
