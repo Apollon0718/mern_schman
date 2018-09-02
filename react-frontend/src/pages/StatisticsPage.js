@@ -8,6 +8,7 @@ class StatisticsPage extends Component {
 
   constructor(props){
     super(props);
+    this.id = this.props.match.params.id;
     this.state = {
       school: {
         _id: '',
@@ -68,7 +69,7 @@ class StatisticsPage extends Component {
             <td>{data.heating_kwh}</td>
             <td>{data.water_eur}</td>
             <td>{data.water_litres}</td>
-            <td><Link to={"/edit/"+data._id} className="btn btn-primary">Edit</Link></td>
+            <td><Link to={"/school/"+this.id+"/edit/"+data._id} className="btn btn-primary">Edit</Link></td>
             <td>
                 <form>
                     <input type="submit" value="Delete" className="btn btn-danger" />
@@ -76,7 +77,7 @@ class StatisticsPage extends Component {
             </td>
           </tr>
         );
-      })
+      }.bind(this))
     }
   }
 

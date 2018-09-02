@@ -114,7 +114,7 @@ class App extends React.Component {
             />
             <LayoutRoute
               exact
-              path="/edit/:id"
+              path="/school/:schoolid/edit/:id"
               layout={MainLayout}
               component={EditDataPage}
             />

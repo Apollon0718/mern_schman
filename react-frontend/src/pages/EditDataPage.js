@@ -26,7 +26,8 @@ class EditDataPage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
+    this.schoolid = this.props.match.params.schoolid;
+     this.state = {
       schools: [],
       schoolData: {
                   _id: '',
@@ -54,8 +55,46 @@ class EditDataPage extends Component {
     })
     .catch(function(error) {
       console.log(error);
+    });
+    const schoolid = this.props.match.params.schoolid;
+    const dataid = this.props.match.params.id;    
+    axios.get('http://localhost:4200/api/school/' + schoolid + '/statistics/' + dataid)
+    .then(response => {
+      this.setState({ schoolData: response.data.data.statistic });
+      console.log(this.state.schoolData);
+    })
+    .catch(function(error){
+      console.log(error);
+    });
+  }
+
+  // ('school/:schoolid/statistics/:statisticid')
+/*   componentWillMount(){
+    const schoolid = this.props.match.params.schoolid;
+    const dataid = this.props.match.params.id;    
+    axios.get('http://localhost:4200/api/school/' + schoolid + '/statistics/' + dataid)
+    .then(response => {
+      this.setState({ schoolData: response.data.statistic });
+      console.log('schoolid=');
+      console.log(schoolid);
+      console.log('dataid=');
+      console.log(dataid);
+    })
+    .catch(function(error){
+      console.log(error);
     })
   }
+ */
+
+/* 
+  schoolOption(){
+    if (this.state.schools instanceof Array) {
+      return this.state.schools.map(function(school, i){
+        return <option value={school._id} id={school._id} key={i}>{school.name}</option>;
+      })
+    }
+  }
+   */
 
   schoolOption(){
     if (this.state.schools instanceof Array) {
@@ -102,12 +141,6 @@ class EditDataPage extends Component {
     this.setState({schoolData: schoolData});
   }
 
-  notify = () => {
-    toast.success("Data added successfully !", {
-      position: toast.POSITION.TOP_CENTER
-    });
-  }
-
   // send the school data to server
   sendSchoolData(data) {
     axios.post('http://localhost:4200/api/schools/statistics', data)
@@ -144,8 +177,7 @@ class EditDataPage extends Component {
                     <Col md={12}>
                       <ValidatingFormGroup>
                         <Label for="exampleSelect">School Name</Label>
-                        <Input type="select" name="_id" value={schoolData._id} onChange={this.onChange}>
-                          <option>Select school</option>
+                        <Input type="select" name="_id" value={this.schoolid} onChange={this.onChange} disabled>
                           {this.schoolOption()}
                         </Input>
                       </ValidatingFormGroup>
@@ -184,7 +216,7 @@ class EditDataPage extends Component {
                           type="text"
                           name="elect_eur"
                           placeholder="Electricity euro"
-                          value={schoolData.elect_euro}
+                          value={schoolData.elect_eur}
                           onChange={this.onChange}
                           required
                         />
@@ -209,7 +241,7 @@ class EditDataPage extends Component {
                           type="text"
                           name="heating_eur"
                           placeholder="Heating euro"
-                          value={schoolData.heating_euro}
+                          value={schoolData.heating_eur}
                           onChange={this.onChange}
                           required
                         />
@@ -235,7 +267,7 @@ class EditDataPage extends Component {
                           type="text"
                           name="water_eur"
                           placeholder="Water euro"
-                          value={schoolData.water_euro}
+                          value={schoolData.water_eur}
                           onChange={this.onChange}
                           required
                         />

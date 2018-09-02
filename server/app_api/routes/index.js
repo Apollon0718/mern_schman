@@ -23,7 +23,7 @@ router
     .post(ctrlSchools.statisticsSave);
 
 router
-    .route('school/:schoolid/statistics/:statisticid')
+    .route('/school/:schoolid/statistics/:statisticid')
     .get(ctrlSchools.statisticsEdit)
     .post(ctrlSchools.statisticsUpdateOne)
     .delete(ctrlSchools.statisticsDeleteOne);
